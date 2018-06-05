@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "MVCCaptcha Home";
+}
+
+<div class="jumbotron">
+    <h1>ASP.NET MVC Captcha</h1>
+    <p class="lead">MVCCaptcha is a free to use MVC based Captcha. The app helps us to produce felexible types of Captchas.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>ASP.NET MVC</h2>
+        <p>
+            GenerateCaptcha action provides the ability to produce diffrent random Captchas in memory, there is no need to save each Captcha on disk space.
+             Captchas will be made inside memory.
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>jQuery/Ajax</h2>
+        <p>Ajax provides the ability to check the result of Captcha matching process, the result will be sent back by action controller in JSON format or you can decise to move forward to next step.
+         jQuery provides the ability to refresh the Captcha.</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Free to use</h2>
+        <p>License free project. and example has benn provided below.</p>
+    </div>
+</div>
+
+<div class="row">
+
+
+    @using (Ajax.BeginForm("Index", "Home", new AjaxOptions() { HttpMethod = "POST" }, new { enctype = "multipart/form-data" }))
+    {
+
+        <div class="col-xs-12">
+            <div class="div-center">
+
+                <div class="divCaptchaContiner">
+                    <img src="@Url.Action("GenerateCaptcha")" alt="Captcha Code" class="img-thumbnail" id="captchaImageID" />
+                    <img src="../images/refresh.png" class="divRefreshContainer" id="imgRefreshId" />
+                </div>
+
+                @Html.TextBox("CaptchaUserInput", null, new
+           {
+               @class = "form-control item-margin",
+               required = "",
+               type = "text",
+               placeholder = "enter captcha",
+               autocomplete = "off"
+           })
+                <input type="submit" value="Submit Captcha" class="btn btn-block" />
+            </div>
+        </div>
+
+    }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.form.js"></script>
+    <script src="~/Scripts/Captcha.js"></script>
+}
